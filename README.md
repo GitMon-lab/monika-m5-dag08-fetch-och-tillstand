@@ -1,10 +1,10 @@
 # Dag 8 · fetch och tre tillstånd
 
-*Modul 5, UI/UX & Frontendutveckling (TypeScript), Lexicon IT-Proffs*
+_Modul 5, UI/UX & Frontendutveckling (TypeScript), Lexicon IT-Proffs_
 
 ## Vad du ska göra idag
 
-Du hämtar **riktig data** med `fetch`: menyn från en JSON-fil och vädret från ett öppet API. Du kontrollerar svaret (`ok`, `status`), hanterar fel och visar tre tillstånd för användaren: *laddar*, *fel* (med en knapp för att försöka igen) och *tomt*. Du testar utan internet genom att skicka in en falsk `fetch`.
+Du hämtar **riktig data** med `fetch`: menyn från en JSON-fil och vädret från ett öppet API. Du kontrollerar svaret (`ok`, `status`), hanterar fel och visar tre tillstånd för användaren: _laddar_, _fel_ (med en knapp för att försöka igen) och _tomt_. Du testar utan internet genom att skicka in en falsk `fetch`.
 
 ## Bakgrund
 
@@ -21,16 +21,19 @@ Igår övade du på en låtsasserver. Idag byter vi ut den mot `fetch`. Det svå
 
 ## Så arbetar du (samma som alltid)
 
-1. **Forka** dagens repo på GitHub (*Fork → Create fork*).
-2. **Klona din fork:** *Code → HTTPS → kopiera adressen*. I terminalen (Ctrl+ö i VS Code): `git clone <adressen>`. Öppna den nya mappen i VS Code.
+1. **Forka** dagens repo på GitHub (_Fork → Create fork_).
+2. **Klona din fork:** _Code → HTTPS → kopiera adressen_. I terminalen (Ctrl+ö i VS Code): `git clone <adressen>`. Öppna den nya mappen i VS Code.
+
 3. **Installera verktygen, en gång per repo:** `npm install` i terminalen.
-4. **Starta servern:** `npm run dev`. Öppna adressen den skriver ut (oftast `http://localhost:5173/`). Tryck F12 och välj fliken *Console*. Stoppa med Ctrl+C. Testsidan öppnar du på samma server: `http://localhost:5173/tests.html` (lägg till `/tests.html` efter adressen).
+4. **Starta servern:** `npm run dev`. Öppna adressen den skriver ut (oftast `http://localhost:5173/`). Tryck F12 och välj fliken _Console_. Stoppa med Ctrl+C. Testsidan öppnar du på samma server: `http://localhost:5173/tests.html` (lägg till `/tests.html` efter adressen).
+
 5. **Gör uppgiften.** Spara och kontrollera i webbläsaren och Console efter varje steg. Gör en commit efter varje avslutat steg: `git add .` och `git commit -m "Beskriv vad du gjorde"`.
+
 6. **Kontrollera typerna:** `npm run typecheck`. Tyst betyder att alla typer stämmer. Röda understrykningar i VS Code är TypeScript som varnar.
 7. **Skicka upp** när du är klar: `git push`.
 8. **Lämna in i Microsoft Forms.**
 
-Fastnar du: skriv ner exakt var och vad du försökt (och vilket felmeddelande du fick), och ta det först i nästa handledda pass. Problem med `npm` eller Node? Läs *Elevguide: Node, Vite och TypeScript*.
+Fastnar du: skriv ner exakt var och vad du försökt (och vilket felmeddelande du fick), och ta det först i nästa handledda pass. Problem med `npm` eller Node? Läs _Elevguide: Node, Vite och TypeScript_.
 
 > Vite tar bara bort typerna och kör koden. Den kontrollerar dem inte. Sidan kan alltså köras trots röda understrykningar.
 
@@ -39,6 +42,8 @@ Fastnar du: skriv ner exakt var och vad du försökt (och vilket felmeddelande d
 ### Steg 1. Klona, starta och titta på sidan
 
 Forka repot, kör `git clone`, öppna mappen i VS Code och starta Vite-servern på `index.html`. Sidan startar men visar bara "Laddar..." eller ingenting, eftersom `src/api.ts` inte är skriven än. Öppna `data/meny.json` direkt i webbläsaren. Titta på hur JSON ser ut. Skillnader mot ett JavaScript-objekt?
+
+"" på egenskapsnamnet/nycklen och {} runt alla rader
 
 ### Steg 2. Läs tests.html och kör testerna
 
@@ -58,15 +63,15 @@ Skriv `tolkaVaderkod` som översätter väderkoden (WMO) till svensk text. Tabel
 
 ### Steg 6. visaTillstand och visaVader
 
-Öppna `src/tillstand-ui.ts`. Skriv `visaTillstand` för de fyra tillstånden och `visaVader`. Använd `textContent`, aldrig `innerHTML`: felmeddelanden kan innehålla text du inte kontrollerar. Felrutan ska ha `role="alert"` och en knapp *Försök igen* som anropar `vidForsokIgen`.
+Öppna `src/tillstand-ui.ts`. Skriv `visaTillstand` för de fyra tillstånden och `visaVader`. Använd `textContent`, aldrig `innerHTML`: felmeddelanden kan innehålla text du inte kontrollerar. Felrutan ska ha `role="alert"` och en knapp _Försök igen_ som anropar `vidForsokIgen`.
 
 ### Steg 7. Koppla ihop i main.js
 
-Gör TODO 1 till 3 i `src/main.ts`. När de är klara ska menyn laddas med tillstånd, filtret fungera på den hämtade menyn och vädret hämtas när du väljer stad och trycker *Hämta väder*.
+Gör TODO 1 till 3 i `src/main.ts`. När de är klara ska menyn laddas med tillstånd, filtret fungera på den hämtade menyn och vädret hämtas när du väljer stad och trycker _Hämta väder_.
 
 ### Steg 8. Utsätt sidan för fel
 
-Öppna DevTools, fliken *Network*. Prova: (1) *Offline* i listan *No throttling*, ladda om och se felet. (2) *Slow 3G*, ladda om och se *Laddar...*. (3) Ändra `"data/meny.json"` till `"data/finns-inte.json"` och se vad som händer. (4) Töm `meny.json` till `[]` och se *tomt*. Skriv i `docs/async-anteckningar.md` vad du såg i varje fall. Ändra tillbaka efteråt.
+Öppna DevTools, fliken _Network_. Prova: (1) _Offline_ i listan _No throttling_, ladda om och se felet. (2) _Slow 3G_, ladda om och se _Laddar..._. (3) Ändra `"data/meny.json"` till `"data/finns-inte.json"` och se vad som händer. (4) Töm `meny.json` till `[]` och se _tomt_. Skriv i `docs/async-anteckningar.md` vad du såg i varje fall. Ändra tillbaka efteråt.
 
 ### Steg 9. Fördjupning (frivillig): reservdata
 
@@ -77,7 +82,7 @@ Sätt `ANVAND_RESERVDATA = true` i `src/main.ts` och se att vädret fungerar uta
 - [ ] Alla tester på `tests.html` är gröna.
 - [ ] `index.html` visar menyn hämtad från `data/meny.json` (tio rätter) och vädret för vald stad.
 - [ ] Du har sett alla tre tillstånden (laddar, fel, tomt) i webbläsaren med hjälp av DevTools.
-- [ ] Knappen *Försök igen* fungerar när du simulerat ett fel.
+- [ ] Knappen _Försök igen_ fungerar när du simulerat ett fel.
 - [ ] Du använder `textContent` och inte `innerHTML` i `src/tillstand-ui.ts`.
 - [ ] Du kan förklara varför `fetch` inte kastar fel för 404.
 - [ ] Du har gjort minst fem commits.
@@ -85,7 +90,7 @@ Sätt `ANVAND_RESERVDATA = true` i `src/main.ts` och se att vädret fungerar uta
 ## Tips om du fastnar
 
 - Glömmer du `await` före `svar.json()` får du en promise istället för data.
-- Sidan visar ingenting alls? Öppna Console. Ett rött fel som börjar med *Uncaught (in promise)* betyder att ett fel inte fångats.
+- Sidan visar ingenting alls? Öppna Console. Ett rött fel som börjar med _Uncaught (in promise)_ betyder att ett fel inte fångats.
 - `fetch` fungerar bara via Vite-servern (`http://127.0.0.1`), inte om du dubbelklickar på `index.html` (`file://`).
 - Vill du se hela svaret från Open-Meteo: öppna url:en direkt i webbläsaren, eller skriv `console.log(data)` i `hamtaVader`.
 - Fastnar du på ett test: läs felmeddelandet. Det står vad testet förväntade sig och vad du returnerade.
