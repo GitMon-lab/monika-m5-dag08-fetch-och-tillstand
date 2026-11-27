@@ -63,7 +63,17 @@ export async function hamtaVader(
     // TODO
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m&timezone=auto`
 
-    const data = await hamtaJson(url, fetchFn)
+    //const data = await hamtaJson(url, fetchFn)as {
+    //    current?: {
+    //       temperature_2m: number
+    //       wind_speed_10m: number
+    //      weather_code: number
+    //  }
+    //}
+
+    // lagt till any för att det är typescript exmplet i presentationen är Javascript
+    const data: any = await hamtaJson(url, fetchFn)
+
     if (!data.current) {
         throw new Error('Oväntat svar från väder-API:et')
     }
@@ -80,4 +90,38 @@ export async function hamtaVader(
 //    Allt annat: "okänt väder".
 export function tolkaVaderkod(kod: number): string {
     // TODO
+
+    let tolkaKod: string = ''
+    switch (true) {
+        case kod === 0:
+            return 'klart'
+            break
+        case kod >= 1 && kod <= 3:
+            return 'mest klart eller molnigt'
+            break
+        case kod === 45 || kod === 48:
+            return 'dimma'
+            break
+        case kod >= 51 && kod <= 57:
+            return 'duggregn'
+            break
+        case kod >= 61 && kod <= 67:
+            return 'regn'
+            break
+        case kod >= 71 && kod <= 77:
+            return 'snö'
+            break
+        case kod >= 80 && kod <= 82:
+            return 'regnskurar'
+            break
+        case kod >= 85 && kod <= 86:
+            return 'snöbyar'
+            break
+        case kod >= 95 && kod <= 99:
+            return 'åska'
+            break
+        default:
+            return 'okänt väder'
+            break
+    }
 }
