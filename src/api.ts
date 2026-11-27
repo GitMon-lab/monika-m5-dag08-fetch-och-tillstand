@@ -61,6 +61,17 @@ export async function hamtaVader(
     fetchFn: FetchFn = fetch
 ): Promise<Vader> {
     // TODO
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m&timezone=auto`
+
+    const data = await hamtaJson(url, fetchFn)
+    if (!data.current) {
+        throw new Error('Oväntat svar från väder-API:et')
+    }
+    return {
+        temperatur: data.current.temperature_2m,
+        vindhastighet: data.current.wind_speed_10m,
+        kod: data.current.weather_code
+    }
 }
 
 // 4. Översätt en väderkod (WMO) till svensk text:
